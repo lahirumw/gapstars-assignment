@@ -10,7 +10,24 @@ AAs we think of the requirement, this is a kind of security requirement and this
 
 ![Architech Diagram](/images/archi-diagram.jpg)
 
-fdf
 
 
 <b>Steps to start the application</b>
+
+1. Create the docker image
+
+docker build -t micservice;
+
+2. Spin up two containers using the image
+ 
+docker run --name micservice1 -d -p 8080:8080 micservice:latest;
+docker run --name micservice2 -d -p 8081:8080 micservice:latest;
+
+3. Apply the changes in proxy config file and reload the proxy server.
+sudo vi /etc/haproxy/haproxy.cfg;
+sudo systemctl restart haproxy;
+
+4. Once you call the API more the 10 times within 5 mins. The proxy will return below response.
+<html><body><h1>429 Too Many Requests</h1>
+You have sent too many requests in a given amount of time.
+</body></html>
