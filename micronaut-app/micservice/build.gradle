@@ -1,0 +1,46 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("io.micronaut.application") version "1.3.3"
+}
+
+version = "0.1"
+group = "com.gapstars"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.gapstars.*")
+    }
+}
+
+dependencies {
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut:micronaut-http-client")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation ("io.micronaut.test:micronaut-test-spock")
+	testImplementation("org.spockframework:spock-core") {
+    	exclude group: "org.codehaus.groovy", module: "groovy-all"
+}
+}
+
+
+application {
+    mainClass.set("com.gapstars.Application")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
+}
+
+
+
+
