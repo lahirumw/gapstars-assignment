@@ -1,5 +1,3 @@
-# Gapstars Assignment
-
 <b>Requirment</b></br>
 Limit the number of request to the API from particular client within a define time period.
 
